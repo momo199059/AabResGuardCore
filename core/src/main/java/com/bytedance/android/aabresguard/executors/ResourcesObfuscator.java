@@ -106,7 +106,7 @@ public class ResourcesObfuscator {
                 .setModules(ImmutableMap.copyOf(obfuscatedModules))
                 .build();
 
-        bundleZipFile.close();
+//        bundleZipFile.close();
         System.out.println(String.format(
                 "obfuscate resources done, coast %s",
                 timeClock.getCoast()

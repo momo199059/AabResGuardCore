@@ -18,6 +18,7 @@ public class AppBundleAnalyzer {
 
     private static final Logger logger = Logger.getLogger(AppBundleAnalyzer.class.getName());
     private final Path bundlePath;
+    private ZipFile bundleZip;
 
     public AppBundleAnalyzer(Path bundlePath) {
         checkFileExistsAndReadable(bundlePath);
@@ -26,10 +27,17 @@ public class AppBundleAnalyzer {
 
     public AppBundle analyze() throws IOException {
         TimeClock timeClock = new TimeClock();
-        ZipFile bundleZip = new ZipFile(bundlePath.toFile());
+        bundleZip = new ZipFile(bundlePath.toFile());
         AppBundle appBundle = AppBundle.buildFromZip(bundleZip);
-//        bundleZip.close();
         System.out.println(String.format("analyze bundle file done, const %s", timeClock.getCoast()));
         return appBundle;
+    }
+
+    public void closeFile() throws IOException {
+        if(bundleZip != null){
+            bundleZip.close();
+            bundleZip = null;
+            System.out.println(String.format("bundle zip close"));
+        }
     }
 }

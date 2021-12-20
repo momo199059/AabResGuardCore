@@ -172,7 +172,8 @@ public abstract class ObfuscateBundleCommand {
     public Path execute() throws IOException, InterruptedException {
         TimeClock timeClock = new TimeClock();
 
-        AppBundle appBundle = new AppBundleAnalyzer(getBundlePath()).analyze();
+        AppBundleAnalyzer analyzer = new AppBundleAnalyzer(getBundlePath());
+        AppBundle appBundle = analyzer.analyze();
         // filter file
         if (getFilterFile().isPresent() && getFilterFile().get()) {
             Set<String> fileFilterRules = new HashSet<>();
@@ -243,6 +244,7 @@ public abstract class ObfuscateBundleCommand {
                 getNetFileSizeDescription(rawSize),
                 getNetFileSizeDescription(filteredSize)
         ));
+        analyzer.closeFile();
         return getOutputPath();
     }
 

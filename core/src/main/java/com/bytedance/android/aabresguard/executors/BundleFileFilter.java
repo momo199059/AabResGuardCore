@@ -80,7 +80,7 @@ public class BundleFileFilter {
                 .setModules(ImmutableMap.copyOf(bundleModules))
                 .build();
 
-//        bundleZipFile.close();
+        bundleZipFile.close();
         System.out.println(String.format(
                 "filter bundle files done, coast %s" +
                         "-----------------------------------------\n" +
